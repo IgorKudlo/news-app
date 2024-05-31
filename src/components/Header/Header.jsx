@@ -2,7 +2,7 @@ import styles from "./styles.module.css";
 import { useCurrentDate } from "../../helpers/hooks/useCurrentDate.jsx";
 
 const Header = () => {
-    const [ now] = useCurrentDate();
+    const { now } = useCurrentDate();
 
     return (
         <header className={styles.header}>
