@@ -27,6 +27,10 @@ const Main = () => {
         keywords: debouncedValue
     });
 
+    const handleFilterCategory  = (category) => changeFilter('category', category);
+
+    const handleFilterKeywords  = (keywords) => changeFilter('keywords', keywords);
+
     const handleNextPage = () => {
         if (filters.page_number < TOTAL_PAGES) {
             changeFilter('page_number', filters.page_number + 1)
@@ -50,13 +54,19 @@ const Main = () => {
                 <Categories
                     categories={dataCategories.categories}
                     selectedCategory={filters.category}
-                    setSelectedCategory={(category) => changeFilter('category', category)}
+                    setSelectedCategory={handleFilterCategory}
                 />
             }
 
-            <Search keywword={filters.keywords} setKeywords={(keywords) => changeFilter('keywords', keywords)} />
+            <Search
+                keywword={filters.keywords}
+                setKeywords={handleFilterKeywords}
+            />
 
-            <NewsBanner isLoading={isLoadingNews} item={dataNews && dataNews.news && dataNews.news[0]} />
+            <NewsBanner
+                isLoading={isLoadingNews}
+                item={dataNews && dataNews.news && dataNews.news[0]}
+            />
 
             <Pagination
                 currentPage={filters.page_number}
@@ -66,7 +76,10 @@ const Main = () => {
                 handlePageClick={handlePageClick}
             />
 
-            <NewsList isLoading={isLoadingNews} news={dataNews?.news} />
+            <NewsList
+                isLoading={isLoadingNews}
+                news={dataNews?.news}
+            />
 
             <Pagination
                 currentPage={filters.page_number}
