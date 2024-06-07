@@ -48,7 +48,7 @@ const Main = () => {
             {
                 dataCategories &&
                 <Categories
-                    categories={['All', ...dataCategories.categories]}
+                    categories={dataCategories.categories}
                     selectedCategory={filters.category}
                     setSelectedCategory={(category) => changeFilter('category', category)}
                 />
