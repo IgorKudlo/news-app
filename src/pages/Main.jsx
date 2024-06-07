@@ -1,8 +1,8 @@
 import styles from "./styles.module.css";
-import { useState } from "react";
 import { getCategories, getNews } from "../api/apiNews.js";
 import { useFetch } from "../helpers/hooks/useFetch.jsx";
 import { useDebounce } from "../helpers/hooks/useDebounce.jsx";
+import { useFilters } from "../helpers/hooks/useFilters.jsx";
 import { PAGE_SIZE, TOTAL_PAGES } from "../constant/constant.js";
 import NewsBanner from "../components/NewsBanner/NewsBanner.jsx";
 import NewsList from "../components/NewsList/NewsList.jsx";
@@ -11,16 +11,12 @@ import Categories from "../components/Categories/Categories.jsx";
 import Search from "../components/Serach/Search.jsx";
 
 const Main = () => {
-    const [filters, setFilters] = useState({
+    const { filters, changeFilter } = useFilters({
         page_number: 1,
         page_size: PAGE_SIZE,
         category: null,
         keywords: ''
     });
-
-    const changeFilter = (key, value) => {
-        setFilters(prev => ({...prev, [key]: value}))
-    }
 
     const { data: dataCategories } = useFetch(getCategories);
 
